@@ -13,4 +13,10 @@
 			select id, name from user where id = #{id }
 		]]>
 	</select>
+	
+	<select id="findByIdAndPassword" parameterType="map" resultType="uservo">
+		<![CDATA[
+			select id, name, password, join_date from user where id = #{id } and password = password(#{password })
+		]]>
+	</select>
 </mapper>

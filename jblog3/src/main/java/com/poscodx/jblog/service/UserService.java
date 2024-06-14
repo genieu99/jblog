@@ -23,4 +23,8 @@ public class UserService {
 		System.out.println(userRepository.findById(id));
 		return userRepository.findById(id);
 	}
+	
+	public UserVo login(String id, String password) {
+		return userRepository.findByIdAndPassword(id, password);
+	}
 }

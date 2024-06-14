@@ -20,7 +20,7 @@
 			}
 
 			$.ajax({
-				url: "/jblog/user/api/checkid?id=" + id,
+				url: "/jblog3/user/api/checkid?id=" + id,
 				type: "get",
 				dataType: "json",
 				error: function(xhr, status, err) {
@@ -47,7 +47,7 @@
 	<div class="center-content">
 		<h1 class="logo">JBlog</h1>
 		<c:import url="/WEB-INF/views/includes/mainHeader.jsp" />
-		<form class="join-form" id="join-form" method="post" action="${pageContext.request.contextPath}/user/join">
+		<form class="join-form" id="join-form" method="post" action="${pageContext.request.contextPath}/user/auth">
 			<label class="block-label" for="name">이름</label>
 			<input id="name"name="name" type="text" value="">
 			
