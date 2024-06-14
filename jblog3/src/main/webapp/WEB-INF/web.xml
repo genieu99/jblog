@@ -6,15 +6,15 @@
 	<display-name>jblog3</display-name>
 	
 	<!-- Context parameters -->
-	<!-- <context-param>
+	<context-param>
 	     <param-name>contextConfigLocation</param-name>
 	     <param-value>classpath:applicationContext.xml</param-value>
-	</context-param> -->
+	</context-param>
 	
 	<!-- Context Loader Listener -->
-	<!-- <listener>
+	<listener>
 	    <listener-class> org.springframework.web.context.ContextLoaderListener </listener-class>
-	</listener> -->
+	</listener>
 	
 	<!-- Character Encoding Filter -->
 	<filter>
