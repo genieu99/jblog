@@ -19,8 +19,6 @@ public class UserService {
 	}
 
 	public UserVo getUser(String id) {
-		System.out.println("확인");
-		System.out.println(userRepository.findById(id));
 		return userRepository.findById(id);
 	}
 	
