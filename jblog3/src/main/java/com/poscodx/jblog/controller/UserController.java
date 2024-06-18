@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+//import com.poscodx.jblog.service.BlogService;
 import com.poscodx.jblog.service.UserService;
 import com.poscodx.jblog.vo.UserVo;
 
@@ -20,6 +21,7 @@ import com.poscodx.jblog.vo.UserVo;
 public class UserController {
 	
 	private UserService userService;
+//	private BlogService blogService;
 	
 	public UserController(UserService userService) {
 		this.userService = userService;
@@ -38,6 +40,8 @@ public class UserController {
 			return "user/join";
 		}
 		userService.join(userVo);
+		System.out.println(userVo.toString());
+		// blogService.setInitial(userVo.getId());
 		return "redirect:/user/joinsuccess";
 	}
 	

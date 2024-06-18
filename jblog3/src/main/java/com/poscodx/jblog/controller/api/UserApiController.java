@@ -23,6 +23,6 @@ public class UserApiController {
 	@GetMapping("/checkid")
 	public Object checkId(@RequestParam(value="id", required=true, defaultValue="") String id) {
 		UserVo userVo = userService.getUser(id);
-		return Map.of("exit", userVo != null);
+		return Map.of("exist", userVo != null);
 	}
 }
