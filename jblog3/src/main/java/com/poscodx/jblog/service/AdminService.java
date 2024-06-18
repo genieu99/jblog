@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.poscodx.jblog.repository.AdminRepository;
 import com.poscodx.jblog.vo.BlogVo;
+import com.poscodx.jblog.vo.PostVo;
 
 @Service
 public class AdminService {
@@ -18,5 +19,9 @@ public class AdminService {
 	
 	public void updateMain(BlogVo blogVo) {
 		adminRepository.updateMain(blogVo);
+	}
+
+	public void write(PostVo postVo) {
+		adminRepository.write(postVo);
 	}
 }

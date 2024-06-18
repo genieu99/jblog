@@ -2,15 +2,21 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="admin">
-	<update id="updateMain" parameterType="blogvo">
-		<![CDATA[
-			update blog set title = #{title } and logo = #{logo }
-		]]>
-	</update>
-	
 	<select id="find" parameterType="string" resultType="blogvo">
 		<![CDATA[
 			select title, logo from blog where id = #{id }
 		]]>
 	</select>
+	
+	<update id="updateMain" parameterType="blogvo">
+		<![CDATA[
+			update blog set title = #{title }, logo = #{logo } where id = #{id }
+		]]>
+	</update>
+	
+	<!-- <insert id="write" parameterType="postvo">
+		<![CDATA[
+			insert into post values(null, #{title }, #{contents }, current_date(), #{categoryNo })
+		]]>
+	</insert> -->
 </mapper>

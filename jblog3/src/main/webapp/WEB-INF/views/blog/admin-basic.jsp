@@ -17,8 +17,9 @@
 		<div id="wrapper">
 			<div id="content" class="full-screen">
 				<c:import url="/WEB-INF/views/includes/adminNavigator.jsp" />
-				<form action="${pageContext.request.contextPath }/admin/basic/update" enctype="multipart/form-data" method="post">
+				<form action="${pageContext.request.contextPath }/${authUser.id }/admin/basic/update" enctype="multipart/form-data" method="post">
 					<input type="hidden" name="logo" value="${blog.logo }" />
+					
 	 		      	<table class="admin-config">
 			      		<tr>
 			      			<td class="t">블로그 제목</td>
