@@ -4,6 +4,7 @@ import java.util.Map;
 
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -12,7 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-//import com.poscodx.jblog.service.BlogService;
+import com.poscodx.jblog.service.BlogService;
 import com.poscodx.jblog.service.UserService;
 import com.poscodx.jblog.vo.UserVo;
 
@@ -20,12 +21,11 @@ import com.poscodx.jblog.vo.UserVo;
 @RequestMapping("/user")
 public class UserController {
 	
+	@Autowired
 	private UserService userService;
-//	private BlogService blogService;
 	
-	public UserController(UserService userService) {
-		this.userService = userService;
-	}
+	@Autowired
+	private BlogService blogService;
 	
 	@GetMapping("/join")
 	public String signup() {
@@ -40,8 +40,7 @@ public class UserController {
 			return "user/join";
 		}
 		userService.join(userVo);
-		System.out.println(userVo.toString());
-		// blogService.setInitial(userVo.getId());
+		blogService.setInitialize(userVo.getId());
 		return "redirect:/user/joinsuccess";
 	}
 	

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="admin">
+	<update id="updateMain" parameterType="blogvo">
+		<![CDATA[
+			update blog set title = #{title } and logo = #{logo }
+		]]>
+	</update>
+	
+	<select id="find" parameterType="string" resultType="blogvo">
+		<![CDATA[
+			select title, logo from blog where id = #{id }
+		]]>
+	</select>
+</mapper>

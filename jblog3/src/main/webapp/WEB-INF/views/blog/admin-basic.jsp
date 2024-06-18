@@ -12,22 +12,23 @@
 <body>
 	<div id="container">
 		<div id="header">
-			<h1>Spring 이야기</h1>
+			<h1>${blog.title }</h1>
 			<c:import url="/WEB-INF/views/includes/blogHeader.jsp" />
 		</div>
 		<div id="wrapper">
 			<div id="content" class="full-screen">
 				<c:import url="/WEB-INF/views/includes/adminHeader.jsp" />
-				<form action="" method="post">
+				<form action="${pageContext.request.contextPath }/admin/basic/update" enctype="multipart/form-data" method="post">
+					<input type="hidden" name="logo" value="${blog.logo }" />
 	 		      	<table class="admin-config">
 			      		<tr>
 			      			<td class="t">블로그 제목</td>
-			      			<td><input type="text" size="40" name="title"></td>
+			      			<td><input type="text" size="40" name="title" value="${blog.title }"></td>
 			      		</tr>
 			      		<tr>
 			      			<td class="t">로고이미지</td>
-			      			<td><img src="${pageContext.request.contextPath}/assets/images/spring-logo.jpg"></td>      			
-			      		</tr>      		
+			      			<td><img src="${pageContext.request.contextPath }${blog.logo }"></td>      			
+			      		</tr>  		
 			      		<tr>
 			      			<td class="t">&nbsp;</td>
 			      			<td><input type="file" name="logo-file"></td>      			
@@ -42,7 +43,7 @@
 		</div>
 		<div id="footer">
 			<p>
-				<strong>Spring 이야기</strong> is powered by JBlog (c)2016
+				<strong>${blog.title }</strong> is powered by JBlog (c)2024
 			</p>
 		</div>
 	</div>

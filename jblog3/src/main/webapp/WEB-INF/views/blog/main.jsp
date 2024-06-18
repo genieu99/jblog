@@ -12,7 +12,7 @@
 <body>
 	<div id="container">
 		<div id="header">
-			<h1>Spring 이야기</h1>
+			<h1>${blog.title }</h1>
 			<c:import url="/WEB-INF/views/includes/blogHeader.jsp" />
 		</div>
 		<div id="wrapper">
@@ -38,7 +38,7 @@
 
 		<div id="extra">
 			<div class="blog-logo">
-				<img src="${pageContext.request.contextPath}/assets/images/spring-logo.jpg">
+				<img src="${pageContext.request.contextPath}${blog.logo }">
 			</div>
 		</div>
 
@@ -54,7 +54,7 @@
 		
 		<div id="footer">
 			<p>
-				<strong>Spring 이야기</strong> is powered by JBlog (c)2016
+				<strong>${blog.title }</strong> is powered by JBlog (c)2024
 			</p>
 		</div>
 	</div>
