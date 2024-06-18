@@ -12,12 +12,11 @@
 <body>
 	<div id="container">
 		<div id="header">
-			<h1>Spring 이야기</h1>
 			<c:import url="/WEB-INF/views/includes/blogHeader.jsp" />
 		</div>
 		<div id="wrapper">
 			<div id="content" class="full-screen">
-				<c:import url="/WEB-INF/views/includes/adminHeader.jsp" />
+				<c:import url="/WEB-INF/views/includes/adminNavigator.jsp" />
 				<form action="" method="post">
 			      	<table class="admin-cat-write">
 			      		<tr>
@@ -43,9 +42,7 @@
 			</div>
 		</div>
 		<div id="footer">
-			<p>
-				<strong>Spring 이야기</strong> is powered by JBlog (c)2016
-			</p>
+			<c:import url="/WEB-INF/views/includes/footer.jsp" />
 		</div>
 	</div>
 </body>

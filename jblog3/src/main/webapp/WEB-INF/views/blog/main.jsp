@@ -12,7 +12,6 @@
 <body>
 	<div id="container">
 		<div id="header">
-			<h1>${blog.title }</h1>
 			<c:import url="/WEB-INF/views/includes/blogHeader.jsp" />
 		</div>
 		<div id="wrapper">
@@ -53,9 +52,7 @@
 		</div>
 		
 		<div id="footer">
-			<p>
-				<strong>${blog.title }</strong> is powered by JBlog (c)2024
-			</p>
+			<c:import url="/WEB-INF/views/includes/footer.jsp" />
 		</div>
 	</div>
 </body>

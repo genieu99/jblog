@@ -12,12 +12,11 @@
 <body>
 	<div id="container">
 		<div id="header">
-			<h1>${blog.title }</h1>
 			<c:import url="/WEB-INF/views/includes/blogHeader.jsp" />
 		</div>
 		<div id="wrapper">
 			<div id="content" class="full-screen">
-				<c:import url="/WEB-INF/views/includes/adminHeader.jsp" />
+				<c:import url="/WEB-INF/views/includes/adminNavigator.jsp" />
 				<form action="${pageContext.request.contextPath }/admin/basic/update" enctype="multipart/form-data" method="post">
 					<input type="hidden" name="logo" value="${blog.logo }" />
 	 		      	<table class="admin-config">
@@ -42,9 +41,7 @@
 			</div>
 		</div>
 		<div id="footer">
-			<p>
-				<strong>${blog.title }</strong> is powered by JBlog (c)2024
-			</p>
+			<c:import url="/WEB-INF/views/includes/footer.jsp" />
 		</div>
 	</div>
 </body>
