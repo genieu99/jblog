@@ -40,6 +40,6 @@ public class CategoryVo {
 	
 	@Override
 	public String toString() {
-		return "CategoryVo [no=" + no + ", name=" + name + ", description=" + description + ", regDate=" + regDate + ", id=" + id + ";
+		return "CategoryVo [no=" + no + ", name=" + name + ", description=" + description + ", regDate=" + regDate + ", id=" + id;
 	}
 }
