@@ -1,6 +1,7 @@
 package com.poscodx.jblog.service;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.poscodx.jblog.repository.UserRepository;
 import com.poscodx.jblog.vo.UserVo;
@@ -13,7 +14,8 @@ public class UserService {
 	public UserService(UserRepository userRepository) {
 		this.userRepository = userRepository;
 	}
-
+	
+	@Transactional
 	public void join(UserVo userVo) {
 		userRepository.insert(userVo);
 	}
