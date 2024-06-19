@@ -2,11 +2,7 @@ package com.poscodx.jblog.controller;
 
 import java.util.Optional;
 
-import javax.servlet.ServletContext;
-
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,12 +22,6 @@ import com.poscodx.jblog.vo.PostVo;
 @Controller
 @RequestMapping("/{id:(?!assets).*}")
 public class BlogController {
-	
-	@Autowired
-	private ApplicationContext applicationContext;
-	
-	@Autowired
-	private ServletContext servletContext;
 	
 	@Autowired
 	private BlogService blogService;
