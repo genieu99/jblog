@@ -64,7 +64,7 @@ public class BlogController {
 	@Auth
 	@GetMapping("/admin/basic")
 	public String adminBasic(@PathVariable("id") String id, Model model, @AuthUser UserVo user) {
-		if (user.getId() != id) {
+		if (!user.getId().equals(id)) {
 			return "errors/accessError";
 		}
 		BlogVo blogVo = adminService.getBasic(id);
@@ -75,7 +75,7 @@ public class BlogController {
 	@Auth
 	@PostMapping("/admin/basic/update")
 	public String adminBasic(@PathVariable("id") String id, BlogVo blogVo, @RequestParam("logo-file") MultipartFile file, Model model, @AuthUser UserVo user) {
-		if (user.getId() != id) {
+		if (!user.getId().equals(id)) {
 			return "errors/accessError";
 		}
 		
@@ -92,7 +92,7 @@ public class BlogController {
 	@Auth
 	@GetMapping("/admin/category")
 	public String adminCategory(@PathVariable("id") String id, Model model, @AuthUser UserVo user) {
-		if (user.getId() != id) {
+		if (!user.getId().equals(id)) {
 			return "errors/accessError";
 		}
 		
@@ -108,7 +108,7 @@ public class BlogController {
 	@Auth
 	@PostMapping("/admin/category/add")
 	public String adminCategory(@PathVariable("id") String id, CategoryVo categoryVo, @AuthUser UserVo user) {
-		if (user.getId() != id) {
+		if (!user.getId().equals(id)) {
 			return "errors/accessError";
 		}
 		categoryVo.setId(id);
@@ -119,7 +119,7 @@ public class BlogController {
 	@Auth
 	@GetMapping("/admin/write")
 	public String adminWrite(@PathVariable("id") String id, @AuthUser UserVo user) {
-		if (user.getId() != id) {
+		if (!user.getId().equals(id)) {
 			return "errors/accessError";
 		}
 		return "blog/admin-write";
@@ -128,7 +128,7 @@ public class BlogController {
 	@Auth
 	@PostMapping("/admin/write")
 	public String adminWrite(@PathVariable("id") String id, PostVo postVo, @AuthUser UserVo user) {
-		if (user.getId() != id) {
+		if (!user.getId().equals(id)) {
 			return "errors/accessError";
 		}
 		adminService.write(postVo);

@@ -8,6 +8,12 @@
 		]]>
 	</insert>
 	
+	<insert id="setInitializeCategory" parameterType="map">
+		<![CDATA[
+			insert into category values(null, #{name }, #{description }, current_date(), #{id })
+		]]>
+	</insert>
+	
 	<select id="getBasic" parameterType="string" resultType="blogvo">
 		<![CDATA[
 			select id, title, logo from blog where id = #{id }

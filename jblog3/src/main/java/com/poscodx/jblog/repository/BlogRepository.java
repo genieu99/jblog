@@ -19,6 +19,12 @@ public class BlogRepository {
 		String filePath = "/assets/images/spring-logo.jpg";
 		sqlSession.insert("blog.setInitialize", Map.of("id", id, "title", title, "filePath", filePath));
 	}
+	
+	public void setInitialCategory(String id) {
+		String name = "미분류";
+		String description = "초기 카테고리입니다.";
+		sqlSession.insert("blog.setInitializeCategory", Map.of("name", name, "description", description, "id", id));
+	}
 
 	public BlogVo getBasic(String id) {
 		return sqlSession.selectOne("blog.getBasic", id);
