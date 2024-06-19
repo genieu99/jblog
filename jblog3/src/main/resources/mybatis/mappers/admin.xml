@@ -4,7 +4,7 @@
 <mapper namespace="admin">
 	<select id="find" parameterType="string" resultType="blogvo">
 		<![CDATA[
-			select title, logo from blog where id = #{id }
+			select id, title, logo from blog where id = #{id }
 		]]>
 	</select>
 	
@@ -19,4 +19,16 @@
 			insert into post values(null, #{title }, #{contents }, current_date(), #{categoryNo })
 		]]>
 	</insert> -->
+	
+	<select id="getCategory" parameterType="string" resultType="categoryvo">
+		<![CDATA[
+			select name, description from category where id = #{id } order by no desc
+		]]>
+	</select>
+	
+	<insert id="addCategory" parameterType="categoryvo">
+		<![CDATA[
+			insert into category values(null, #{name }, #{description }, current_date(), #{id })
+		]]>
+	</insert>
 </mapper>
