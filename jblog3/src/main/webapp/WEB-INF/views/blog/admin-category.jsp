@@ -32,7 +32,9 @@
 							<td>${category.name }</td>
 							<td>${category.count }</td>
 							<td>${category.description }</td>
-							<td><img src="${pageContext.request.contextPath}/assets/images/delete.jpg"></td>
+							<td>
+        						<a href="${pageContext.request.contextPath}/${authUser.id}/admin/category/delete/${category.no }"><img src="${pageContext.request.contextPath}/assets/images/delete.jpg"></a>
+        					</td>
 						</tr>
 		      		</c:forEach>  
 				</table>

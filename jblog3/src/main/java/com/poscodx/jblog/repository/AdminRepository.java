@@ -35,4 +35,8 @@ public class AdminRepository {
 	public void addCategory(CategoryVo categoryVo) {
 		sqlSession.insert("admin.addCategory", categoryVo);
 	}
+
+	public void deleteCategory(Long no) {
+		sqlSession.delete("admin.deleteCategory", no);
+	}
 }

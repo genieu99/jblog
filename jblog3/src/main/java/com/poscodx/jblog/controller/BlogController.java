@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -113,6 +114,17 @@ public class BlogController {
 		}
 		categoryVo.setId(id);
 		adminService.addCategory(categoryVo);
+		return "redirect:/" + id + "/admin/category";
+	}
+	
+	@Auth
+	@RequestMapping("/admin/category/delete/{no}")
+	public String deleteAdminCategory(@PathVariable("id") String id, @PathVariable("no") Long no, @AuthUser UserVo user, Model model) {
+		if (!user.getId().equals(id)) {
+			return "errors/accessError";
+		}
+		System.out.println(no);
+		adminService.deleteCategory(no);
 		return "redirect:/" + id + "/admin/category";
 	}
 	

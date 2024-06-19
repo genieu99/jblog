@@ -35,4 +35,8 @@ public class AdminService {
 	public void addCategory(CategoryVo categoryVo) {
 		adminRepository.addCategory(categoryVo);
 	}
+
+	public void deleteCategory(Long no) {
+		adminRepository.deleteCategory(no);
+	}
 }
