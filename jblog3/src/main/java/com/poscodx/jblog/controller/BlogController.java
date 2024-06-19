@@ -1,5 +1,6 @@
 package com.poscodx.jblog.controller;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,11 +14,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.poscodx.jblog.security.Auth;
+import com.poscodx.jblog.security.AuthUser;
 import com.poscodx.jblog.service.AdminService;
 import com.poscodx.jblog.service.BlogService;
 import com.poscodx.jblog.service.FileUploadService;
 import com.poscodx.jblog.vo.BlogVo;
+import com.poscodx.jblog.vo.CategoryVo;
 import com.poscodx.jblog.vo.PostVo;
+import com.poscodx.jblog.vo.UserVo;
 
 @Controller
 @RequestMapping("/{id:(?!assets).*}")
@@ -59,7 +63,10 @@ public class BlogController {
 	
 	@Auth
 	@GetMapping("/admin/basic")
-	public String adminBasic(@PathVariable("id") String id, Model model) {
+	public String adminBasic(@PathVariable("id") String id, Model model, @AuthUser UserVo user) {
+		if (user.getId() != id) {
+			return "errors/accessError";
+		}
 		BlogVo blogVo = adminService.getBasic(id);
 		model.addAttribute("blog", blogVo);
 		return "blog/admin-basic";
@@ -67,35 +74,63 @@ public class BlogController {
 	
 	@Auth
 	@PostMapping("/admin/basic/update")
-	public String adminBasic(@PathVariable("id") String id, BlogVo blogVo, @RequestParam("logo-file") MultipartFile file, Model model) {
-		String logo = fileUploadService.restore(file);
+	public String adminBasic(@PathVariable("id") String id, BlogVo blogVo, @RequestParam("logo-file") MultipartFile file, Model model, @AuthUser UserVo user) {
+		if (user.getId() != id) {
+			return "errors/accessError";
+		}
 		
+		String logo = fileUploadService.restore(file);
 		if (logo != null) {
 			blogVo.setLogo(logo);
 		}
 		
 		model.addAttribute("blog", blogVo);
 		adminService.updateMain(blogVo);
-		
 		return "redirect:/" + id + "/admin/basic";
 	}
 	
 	@Auth
-	@RequestMapping("/admin/category")
-	public String adminCategory(@PathVariable("id") String id) {
+	@GetMapping("/admin/category")
+	public String adminCategory(@PathVariable("id") String id, Model model, @AuthUser UserVo user) {
+		if (user.getId() != id) {
+			return "errors/accessError";
+		}
+		
+		List<CategoryVo> categoryVo = adminService.getCategory(id);
+		model.addAttribute("category", categoryVo);
+		
+		BlogVo blogVo = adminService.getBasic(id);
+		model.addAttribute("blog", blogVo);
 		
 		return "blog/admin-category";
 	}
 	
 	@Auth
+	@PostMapping("/admin/category/add")
+	public String adminCategory(@PathVariable("id") String id, CategoryVo categoryVo, @AuthUser UserVo user) {
+		if (user.getId() != id) {
+			return "errors/accessError";
+		}
+		categoryVo.setId(id);
+		adminService.addCategory(categoryVo);
+		return "redirect:/" + id + "/admin/category";
+	}
+	
+	@Auth
 	@GetMapping("/admin/write")
-	public String adminWrite() {
+	public String adminWrite(@PathVariable("id") String id, @AuthUser UserVo user) {
+		if (user.getId() != id) {
+			return "errors/accessError";
+		}
 		return "blog/admin-write";
 	}
 	
 	@Auth
 	@PostMapping("/admin/write")
-	public String adminWrite(PostVo postVo) {
+	public String adminWrite(@PathVariable("id") String id, PostVo postVo, @AuthUser UserVo user) {
+		if (user.getId() != id) {
+			return "errors/accessError";
+		}
 		adminService.write(postVo);
 		return "blog/admin-write";
 	}
