@@ -63,7 +63,6 @@ public class BlogController {
 		model.addAttribute("list", postList);
 		
 		PostVo postVo = blogService.getPost(id, pathNo2);
-		System.out.println(postVo);
 		model.addAttribute("postNow", postVo);
 		
 		List<CategoryVo> categoryList = adminService.getCategory(id);

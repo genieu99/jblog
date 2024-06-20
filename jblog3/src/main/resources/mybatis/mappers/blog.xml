@@ -22,7 +22,7 @@
 	
 	<select id="getPostList" parameterType="string" resultType="postvo">
 		<![CDATA[
-			select post.no as no, title, contents, post.reg_date from post
+			select post.no as no, title, contents, post.reg_date as regDate, category_no as categoryNo from post
 			left join category on post.category_no = category.no
 			where category.id = #{id }
 			order by no desc;
@@ -31,7 +31,7 @@
 	
 	<select id="getPost" parameterType="map" resultType="postvo">
 		<![CDATA[
-			select post.no, title, contents, post.reg_date from post
+			select post.no, title, contents, post.reg_date as regDate from post
 			left join category on post.category_no = category.no
 			where category.id = #{id } and post.no = #{postNo }
 		]]>
