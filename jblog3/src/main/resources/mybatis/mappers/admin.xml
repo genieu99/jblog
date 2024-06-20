@@ -16,9 +16,14 @@
 	
 	<select id="getCategory" parameterType="string" resultType="categoryvo">
 		<![CDATA[
-			select no, name, description, count_post.count
-			from category join (select count(*) as count, category_no from post group by category_no) count_post
-			where id = 'yujin0419' and count_post.category_no = category.no;
+			select no, name, description, ifnull(count_post.count, 0) as count
+			from category left join (
+				select count(*) as count, category_no
+				from post
+				group by category_no
+			) count_post on count_post.category_no = category.no
+			where id = 'yujin0419'
+			order by no desc
 		]]>
 	</select>
 	

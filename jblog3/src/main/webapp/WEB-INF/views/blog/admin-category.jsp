@@ -38,7 +38,7 @@
 						</tr>
 		      		</c:forEach>  
 				</table>
-      			
+				
       			<form action="${pageContext.request.contextPath }/${authUser.id }/admin/category/add" method="post">
       				<h4 class="n-c">새로운 카테고리 추가</h4>
 			      	<table id="admin-cat-add">
