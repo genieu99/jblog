@@ -29,11 +29,30 @@
 		]]>
 	</select>
 	
+	<select id="getPostListByCategory" parameterType="map" resultType="postvo">
+		<![CDATA[
+			select post.no as no, title, contents, post.reg_date as regDate, category_no as categoryNo from post
+			left join category on post.category_no = category.no
+			where category.id = #{id } and category.no = #{pathNo }
+			order by no desc;
+		]]>
+	</select>
+	
 	<select id="getPost" parameterType="map" resultType="postvo">
 		<![CDATA[
 			select post.no, title, contents, post.reg_date as regDate from post
 			left join category on post.category_no = category.no
 			where category.id = #{id } and post.no = #{postNo }
+		]]>
+	</select>
+	
+	<select id="getPostByCategory" parameterType="map" resultType="postvo">
+		<![CDATA[
+			select post.no, title, contents, post.reg_date as regDate from post
+			left join category on post.category_no = category.no
+			where category.id = #{id } and post.category_no = #{pathNo }
+			order by no desc
+			limit 1;
 		]]>
 	</select>
 	

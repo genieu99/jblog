@@ -35,9 +35,17 @@ public class BlogRepository {
 	public List<PostVo> getPostList(String id) {
 		return sqlSession.selectList("blog.getPostList", id);
 	}
-
+	
+	public List<PostVo> getPostListByCategory(String id, Long pathNo1) {
+		return sqlSession.selectList("blog.getPostListByCategory", Map.of("id", id, "pathNo", pathNo1));
+	}
+	
 	public PostVo getPost(String id, Long postNo) {
 		return sqlSession.selectOne("blog.getPost", Map.of("id", id, "postNo", postNo));
+	}
+	
+	public PostVo getPostByCategory(String id, Long pathNo1) {
+		return sqlSession.selectOne("blog.getPostByCategory", Map.of("id", id, "pathNo", pathNo1));
 	}
 
 	public Long getInitialPostCategoryNo(String id) {

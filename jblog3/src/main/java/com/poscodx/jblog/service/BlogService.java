@@ -27,9 +27,17 @@ public class BlogService {
 	public List<PostVo> getPostList(String id) {
 		return blogRepository.getPostList(id);
 	}
+	
+	public List<PostVo> getPostListByCategory(String id, Long pathNo1) {
+		return blogRepository.getPostListByCategory(id, pathNo1);
+	}
 
 	public PostVo getPost(String id, Long postNo) {
 		return blogRepository.getPost(id, postNo);
+	}
+
+	public PostVo getPostByCategory(String id, Long pathNo1) {
+		return blogRepository.getPostByCategory(id, pathNo1);
 	}
 
 	public Long getInitialPostCategoryNo(String id) {

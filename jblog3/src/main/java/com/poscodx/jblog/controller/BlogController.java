@@ -46,23 +46,31 @@ public class BlogController {
 		Long pathNo1 = 0L;
 		Long pathNo2 = 0L;
 		
+		List<PostVo> postList = null;
+		PostVo postVo = null;
+		
 		if (postNo.isPresent()) {
 			pathNo1 = categoryNo.get();
 			pathNo2 = postNo.get();
 		} else if (categoryNo.isPresent()) {
 			pathNo1 = categoryNo.get();
+			
+			postList = blogService.getPostListByCategory(id, pathNo1);
+			postVo = blogService.getPostByCategory(id, pathNo1);
+			
 		} else {
 			pathNo1 = blogService.getInitialPostCategoryNo(id);
 			pathNo2 = blogService.getInitialPostId(id);
+			
+			postList = blogService.getPostList(id);
+			postVo = blogService.getPost(id, pathNo2);
 		}
 		
 		BlogVo blogVo = blogService.getBasic(id);
 		model.addAttribute("blog", blogVo);
 		
-		List<PostVo> postList = blogService.getPostList(id);
+	
 		model.addAttribute("list", postList);
-		
-		PostVo postVo = blogService.getPost(id, pathNo2);
 		model.addAttribute("postNow", postVo);
 		
 		List<CategoryVo> categoryList = adminService.getCategory(id);
