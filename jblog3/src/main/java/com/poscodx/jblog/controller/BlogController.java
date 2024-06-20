@@ -1,5 +1,6 @@
 package com.poscodx.jblog.controller;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
@@ -43,6 +44,9 @@ public class BlogController {
 			@PathVariable("postNo") Optional<Long> postNo,
 			Model model
 	) {
+		BlogVo blogVo = blogService.getBasic(id);
+		model.addAttribute("blog", blogVo);
+		
 		Long pathNo1 = 0L;
 		Long pathNo2 = 0L;
 		
@@ -52,24 +56,21 @@ public class BlogController {
 		if (postNo.isPresent()) {
 			pathNo1 = categoryNo.get();
 			pathNo2 = postNo.get();
+			
 		} else if (categoryNo.isPresent()) {
 			pathNo1 = categoryNo.get();
-			
-			postList = blogService.getPostListByCategory(id, pathNo1);
-			postVo = blogService.getPostByCategory(id, pathNo1);
 			
 		} else {
 			pathNo1 = blogService.getInitialPostCategoryNo(id);
 			pathNo2 = blogService.getInitialPostId(id);
-			
-			postList = blogService.getPostList(id);
-			postVo = blogService.getPost(id, pathNo2);
 		}
 		
-		BlogVo blogVo = blogService.getBasic(id);
-		model.addAttribute("blog", blogVo);
+		postList = blogService.getPostListByCategory(id, pathNo1);
+		postVo = blogService.getPostByCategory(id, pathNo1);
 		
-	
+		System.out.println(postList);
+		System.out.println(postVo);
+		
 		model.addAttribute("list", postList);
 		model.addAttribute("postNow", postVo);
 		
@@ -140,7 +141,11 @@ public class BlogController {
 		if (!user.getId().equals(id)) {
 			return "errors/accessError";
 		}
-		adminService.deleteCategory(no);
+//		try {
+//			adminService.deleteCategory(no);
+//		} catch (SQLException e) {
+//			return "redirect:/" + id + "/admin/category?error=카테고리를 삭제할 수 없습니다. 해당 카테고리에 연결된 게시물이 있습니다.";
+//		}
 		return "redirect:/" + id + "/admin/category";
 	}
 	

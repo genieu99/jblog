@@ -64,3 +64,9 @@
 	</div>
 </body>
 </html>
+
+<% if (request.getParameter("error") != null && request.getParameter("error").equals("true")) { %>
+    <script>
+        alert("${errorMessage}");
+    </script>
+<% } %>
