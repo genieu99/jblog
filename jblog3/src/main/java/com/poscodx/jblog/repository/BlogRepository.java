@@ -1,5 +1,6 @@
 package com.poscodx.jblog.repository;
 
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
@@ -7,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.poscodx.jblog.vo.BlogVo;
+import com.poscodx.jblog.vo.PostVo;
 
 @Repository
 public class BlogRepository {
@@ -30,4 +32,19 @@ public class BlogRepository {
 		return sqlSession.selectOne("blog.getBasic", id);
 	}
 
+	public List<PostVo> getPostList(String id) {
+		return sqlSession.selectList("blog.getPostList", id);
+	}
+
+	public PostVo getPost(String id, Long postNo) {
+		return sqlSession.selectOne("blog.getPost", Map.of("id", id, "postNo", postNo));
+	}
+
+	public Long getInitialPostCategoryNo(String id) {
+		return sqlSession.selectOne("blog.getInitialPostCategoryNo", id);
+	}
+
+	public Long getInitialPostId(String id) {
+		return sqlSession.selectOne("blog.getInitialPostId", id);
+	}
 }

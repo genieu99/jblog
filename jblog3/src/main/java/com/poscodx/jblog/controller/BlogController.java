@@ -52,12 +52,23 @@ public class BlogController {
 		} else if (categoryNo.isPresent()) {
 			pathNo1 = categoryNo.get();
 		} else {
-			pathNo1 = 1L;
-			pathNo2 = 1L;
+			pathNo1 = blogService.getInitialPostCategoryNo(id);
+			pathNo2 = blogService.getInitialPostId(id);
 		}
 		
 		BlogVo blogVo = blogService.getBasic(id);
 		model.addAttribute("blog", blogVo);
+		
+		List<PostVo> postList = blogService.getPostList(id);
+		model.addAttribute("list", postList);
+		
+		PostVo postVo = blogService.getPost(id, pathNo2);
+		System.out.println(postVo);
+		model.addAttribute("postNow", postVo);
+		
+		List<CategoryVo> categoryList = adminService.getCategory(id);
+		model.addAttribute("category", categoryList);
+		
 		return "blog/main";
 	}
 	

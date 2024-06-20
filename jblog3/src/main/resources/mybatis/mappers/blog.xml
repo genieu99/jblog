@@ -19,4 +19,39 @@
 			select id, title, logo from blog where id = #{id }
 		]]>
 	</select>
+	
+	<select id="getPostList" parameterType="string" resultType="postvo">
+		<![CDATA[
+			select post.no as no, title, contents, post.reg_date from post
+			left join category on post.category_no = category.no
+			where category.id = #{id }
+			order by no desc;
+		]]>
+	</select>
+	
+	<select id="getPost" parameterType="map" resultType="postvo">
+		<![CDATA[
+			select post.no, title, contents, post.reg_date from post
+			left join category on post.category_no = category.no
+			where category.id = #{id } and post.no = #{postNo }
+		]]>
+	</select>
+	
+	<select id="getInitialPostCategoryNo" parameterType="string" resultType="long">
+		<![CDATA[
+			select post.category_no as no from post left join category on post.category_no = category.no
+			where category.id = #{id }
+			order by no desc
+			limit 1;
+		]]>
+	</select>
+	
+	<select id="getInitialPostId" parameterType="string" resultType="long">
+		<![CDATA[
+			select post.no as no from post left join category on post.category_no = category.no
+			where category.id = #{id }
+			order by no desc
+			limit 1;
+		]]>
+	</select>
 </mapper>
