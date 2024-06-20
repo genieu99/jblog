@@ -132,6 +132,10 @@ public class BlogController {
 		if (!user.getId().equals(id)) {
 			return "errors/accessError";
 		}
+		
+		BlogVo blogVo = adminService.getBasic(id);
+		model.addAttribute("blog", blogVo);
+		
 		List<CategoryVo> categoryVo = adminService.getCategory(id);
 		model.addAttribute("category", categoryVo);
 		
@@ -140,7 +144,7 @@ public class BlogController {
 	
 	@Auth
 	@PostMapping("/admin/write")
-	public String adminWrite(@PathVariable("id") String id, PostVo postVo, @AuthUser UserVo user) {
+	public String adminWrite(@PathVariable("id") String id, PostVo postVo, Model model, @AuthUser UserVo user) {
 		if (!user.getId().equals(id)) {
 			return "errors/accessError";
 		}
