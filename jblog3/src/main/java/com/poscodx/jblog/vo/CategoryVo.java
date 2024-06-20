@@ -6,6 +6,7 @@ public class CategoryVo {
 	private String description;
 	private String regDate;
 	private String id;
+	private int count = 0;
 	
 	public Long getNo() {
 		return no;
@@ -36,6 +37,12 @@ public class CategoryVo {
 	}
 	public void setId(String id) {
 		this.id = id;
+	}
+	public int getCount() {
+		return count;
+	}
+	public void setCount(int count) {
+		this.count = count;
 	}
 	
 	@Override
