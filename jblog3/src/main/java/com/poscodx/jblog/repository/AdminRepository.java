@@ -16,16 +16,12 @@ public class AdminRepository {
 	@Autowired
 	private SqlSession sqlSession;
 	
-	public BlogVo find(String id) {
-		return sqlSession.selectOne("admin.find", id);
+	public BlogVo findAll(String id) {
+		return sqlSession.selectOne("admin.findAll", id);
 	}
 
 	public void updateMain(BlogVo blogVo) {
 		sqlSession.update("admin.updateMain", blogVo);	
-	}
-
-	public void write(PostVo postVo) {
-		sqlSession.insert("admin.write", postVo);
 	}
 
 	public List<CategoryVo> getCategory(String id) {
@@ -38,5 +34,9 @@ public class AdminRepository {
 
 	public void deleteCategory(Long no) {
 		sqlSession.delete("admin.deleteCategory", no);
+	}
+
+	public void write(PostVo postVo) {
+		sqlSession.insert("admin.write", postVo);
 	}
 }

@@ -17,15 +17,11 @@ public class AdminService {
 	private AdminRepository adminRepository;
 
 	public BlogVo getBasic(String id) {
-		return adminRepository.find(id);
+		return adminRepository.findAll(id);
 	}
 	
 	public void updateMain(BlogVo blogVo) {
 		adminRepository.updateMain(blogVo);
-	}
-
-	public void write(PostVo postVo) {
-		adminRepository.write(postVo);
 	}
 
 	public List<CategoryVo> getCategory(String id) {
@@ -38,5 +34,9 @@ public class AdminService {
 
 	public void deleteCategory(Long no) {
 		adminRepository.deleteCategory(no);
+	}
+
+	public void write(PostVo postVo) {
+		adminRepository.write(postVo);
 	}
 }

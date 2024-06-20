@@ -6,7 +6,6 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -123,17 +122,19 @@ public class BlogController {
 		if (!user.getId().equals(id)) {
 			return "errors/accessError";
 		}
-		System.out.println(no);
 		adminService.deleteCategory(no);
 		return "redirect:/" + id + "/admin/category";
 	}
 	
 	@Auth
 	@GetMapping("/admin/write")
-	public String adminWrite(@PathVariable("id") String id, @AuthUser UserVo user) {
+	public String adminWrite(@PathVariable("id") String id, Model model, @AuthUser UserVo user) {
 		if (!user.getId().equals(id)) {
 			return "errors/accessError";
 		}
+		List<CategoryVo> categoryVo = adminService.getCategory(id);
+		model.addAttribute("category", categoryVo);
+		
 		return "blog/admin-write";
 	}
 	
@@ -143,7 +144,8 @@ public class BlogController {
 		if (!user.getId().equals(id)) {
 			return "errors/accessError";
 		}
+		
 		adminService.write(postVo);
-		return "blog/admin-write";
+		return "redirect:/" + id;
 	}
 }

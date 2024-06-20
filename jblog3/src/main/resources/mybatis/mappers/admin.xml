@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="admin">
-	<select id="find" parameterType="string" resultType="blogvo">
+	<select id="findAll" parameterType="string" resultType="blogvo">
 		<![CDATA[
 			select id, title, logo from blog where id = #{id }
 		]]>
@@ -13,12 +13,6 @@
 			update blog set title = #{title }, logo = #{logo } where id = #{id }
 		]]>
 	</update>
-	
-	<!-- <insert id="write" parameterType="postvo">
-		<![CDATA[
-			insert into post values(null, #{title }, #{contents }, current_date(), #{categoryNo })
-		]]>
-	</insert> -->
 	
 	<select id="getCategory" parameterType="string" resultType="categoryvo">
 		<![CDATA[
@@ -39,4 +33,10 @@
 			delete from category where no = #{no }
 		]]>
 	</delete>
+	
+	<insert id="write" parameterType="postvo">
+		<![CDATA[
+			insert into post values(null, #{title }, #{contents }, current_date(), #{categoryNo })
+		]]>
+	</insert>
 </mapper>
