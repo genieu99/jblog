@@ -13,6 +13,8 @@
 <script src="${pageContext.request.contextPath }/assets/js/jquery/jquery-1.9.0.js"></script>
 <script>
 	$(function() {
+		var idChecked = false;
+		
 		$("#btn-checkemail").click(function() {
 			var id = $("#blog-id").val();
 			if (id == '') {
@@ -29,17 +31,27 @@
 				success: function(response) {
 					if (response.exist) {
 						alert("존재하는 아이디입니다. 다른 아이디를 사용해 주세요.");
-						$("#id").val("");
-						$("#id").focus();
-						return;
+						$("#blog-id").val("");
+						$("#blog-id").focus();
+						
+						idChecked = false;
+					} else{
+						// 사용할 수 있는 아이디
+						$("#btn-checkemail").hide();
+						$("#img-checkemail").show();
+						
+						idChecked = true;
 					}
-					
-					// 사용할 수 있는 아이디
-					$("#btn-checkemail").hide();
-					$("#img-checkemail").show();
 				}
 			});
 		})
+		
+		$("#join-form").submit(function(event) {
+			if (!idChecked) {
+				alert("아이디 중복 체크를 해주세요.");
+				event.preventDefault();
+			}
+		});
 	});
 </script>
 </head>
