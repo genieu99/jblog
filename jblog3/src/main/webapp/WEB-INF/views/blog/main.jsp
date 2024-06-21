@@ -26,6 +26,7 @@
 					<c:forEach items="${list }" var="list" varStatus="status">
 						<li>
 							<a href="${pageContext.request.contextPath}/${id}/${list.categoryNo}/${list.no}">
+								${list.title }
 							</a>
 							<span>${list.regDate }</span>
 						</li>
