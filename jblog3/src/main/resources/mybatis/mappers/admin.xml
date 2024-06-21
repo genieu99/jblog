@@ -22,7 +22,7 @@
 				from post
 				group by category_no
 			) count_post on count_post.category_no = category.no
-			where id = 'yujin0419'
+			where id = #{id }
 			order by no desc
 		]]>
 	</select>
