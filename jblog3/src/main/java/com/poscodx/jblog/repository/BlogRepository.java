@@ -27,6 +27,16 @@ public class BlogRepository {
 		String description = "초기 카테고리입니다.";
 		sqlSession.insert("blog.setInitializeCategory", Map.of("name", name, "description", description, "id", id));
 	}
+	
+	public int findInitialCategory(String id) {
+		return sqlSession.selectOne("blog.findInitialCategory", id);
+	}
+	
+	public void setInitialPost(String id, int categoryNo) {
+		String title = "환영합니다!";
+		String contents = id + "의 블로그에 방문해주셔서 감사합니다.";
+		sqlSession.insert("blog.setInitializePost", Map.of("title", title, "contents", contents, "id", id, "categoryNo", categoryNo));
+	}
 
 	public BlogVo getBasic(String id) {
 		return sqlSession.selectOne("blog.getBasic", id);

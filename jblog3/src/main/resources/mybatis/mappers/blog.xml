@@ -14,6 +14,18 @@
 		]]>
 	</insert>
 	
+	<select id="findInitialCategory" parameterType="string" resultType="int">
+		<![CDATA[
+			select no from category where id = #{id } and name = "미분류"
+		]]>
+	</select>
+	
+	<insert id="setInitializePost" parameterType="map">
+		<![CDATA[
+			insert into post values(null, #{title }, #{contents }, current_date(), #{categoryNo })
+		]]>
+	</insert>
+	
 	<select id="getBasic" parameterType="string" resultType="blogvo">
 		<![CDATA[
 			select id, title, logo from blog where id = #{id }

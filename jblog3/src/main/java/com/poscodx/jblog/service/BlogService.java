@@ -18,6 +18,9 @@ public class BlogService {
 	public void setInitialize(String id) {
 		blogRepository.setInitialize(id);
 		blogRepository.setInitialCategory(id);
+		
+		int categoryNo = blogRepository.findInitialCategory(id);
+		blogRepository.setInitialPost(id, categoryNo);
 	}
 	
 	public BlogVo getBasic(String id) {
