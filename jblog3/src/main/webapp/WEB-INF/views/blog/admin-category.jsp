@@ -65,8 +65,6 @@
 </body>
 </html>
 
-<% if (request.getParameter("error") != null && request.getParameter("error").equals("true")) { %>
-    <script>
-        alert("${errorMessage}");
-    </script>
-<% } %>
+<c:if test='${param.result == "fail" }'>
+	<script>alert('[error] 카테고리에 해당하는 포스트수가 0일 때만 삭제가능합니다.')</script>
+</c:if>

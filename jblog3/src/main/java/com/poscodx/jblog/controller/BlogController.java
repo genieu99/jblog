@@ -146,7 +146,11 @@ public class BlogController {
 			return "errors/accessError";
 		}
 		
-		adminService.deleteCategory(no);
+		try {
+			adminService.deleteCategory(no);
+		} catch (Exception e) {
+			return "redirect:/" + id + "/admin/category?result=fail";
+		}
 		return "redirect:/" + id + "/admin/category";
 	}
 	
