@@ -27,7 +27,7 @@
         border-radius: 8px;
     }
     h1 {
-        color: #ff6347;
+        color: #4978D2;
         font-size: 2em;
         margin-bottom: 20px;
     }
@@ -41,7 +41,7 @@
         display: inline-block;
         margin-top: 20px;
         padding: 10px 20px;
-        background-color: #fe1100;
+        background-color: #4978D2;
         color: #fff;
         text-decoration: none;
         border-radius: 4px;
