@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="admin">
+	<select id="findAll" parameterType="string" resultType="blogvo">
+		<![CDATA[
+			select id, title, logo from blog where id = #{id }
+		]]>
+	</select>
+	
+	<update id="updateMain" parameterType="blogvo">
+		<![CDATA[
+			update blog set title = #{title }, logo = #{logo } where id = #{id }
+		]]>
+	</update>
+	
+	<select id="getCategory" parameterType="string" resultType="categoryvo">
+		<![CDATA[
+			select no, name, description, ifnull(count_post.count, 0) as count
+			from category left join (
+				select count(*) as count, category_no
+				from post
+				group by category_no
+			) count_post on count_post.category_no = category.no
+			where id = #{id }
+			order by no desc
+		]]>
+	</select>
+	
+	<insert id="addCategory" parameterType="categoryvo">
+		<![CDATA[
+			insert into category values(null, #{name }, #{description }, current_date(), #{id })
+		]]>
+	</insert>
+	
+	<delete id="deleteCategory" parameterType="long">
+		<![CDATA[
+			delete from category where no = #{no }
+		]]>
+	</delete>
+	
+	<insert id="write" parameterType="postvo">
+		<![CDATA[
+			insert into post values(null, #{title }, #{contents }, current_date(), #{categoryNo })
+		]]>
+	</insert>
+</mapper>
