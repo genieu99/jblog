@@ -8,8 +8,8 @@
 		<typeAlias type="com.poscodx.jblog.vo.CategoryVo" alias="categoryvo" />
 	</typeAliases>
 	<mappers>
-		<mapper resource="/mybatis/mappers/user.xml" />
-		<mapper resource="/mybatis/mappers/blog.xml" />
-		<mapper resource="/mybatis/mappers/admin.xml" />
+		<mapper resource="com/poscodx/jblog/config/app/mybatis/mappers/user.xml" />
+		<mapper resource="com/poscodx/jblog/config/app/mybatis/mappers/blog.xml" />
+		<mapper resource="com/poscodx/jblog/config/app/mybatis/mappers/admin.xml" />
 	</mappers>
 </configuration>

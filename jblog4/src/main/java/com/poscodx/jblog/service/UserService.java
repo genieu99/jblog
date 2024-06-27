@@ -1,5 +1,6 @@
 package com.poscodx.jblog.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -9,11 +10,8 @@ import com.poscodx.jblog.vo.UserVo;
 @Service
 public class UserService {
 	
+	@Autowired
 	private UserRepository userRepository;
-	
-	public UserService(UserRepository userRepository) {
-		this.userRepository = userRepository;
-	}
 	
 	@Transactional
 	public void join(UserVo userVo) {
