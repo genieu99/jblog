@@ -1,65 +1,43 @@
-package com.poscodx.jblog.config.web;
-
-import java.util.List;
+package com.poscodx.jblog.config.app;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.method.support.HandlerMethodArgumentResolver;
-import org.springframework.web.servlet.HandlerInterceptor;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-
-import com.poscodx.jblog.security.AuthInterceptor;
-import com.poscodx.jblog.security.AuthUserHandlerMethodArgumentResolver;
-import com.poscodx.jblog.security.LoginInterceptor;
-import com.poscodx.jblog.security.LogoutInterceptor;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
+import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 
 @Configuration
-@EnableWebMvc
-public class SecurityConfig implements WebMvcConfigurer {
+@EnableWebSecurity
+public class SecurityConfig {
 	
-	// Argument Resolver
 	@Bean
-	public HandlerMethodArgumentResolver handlerMethodArgumentResolver() {
-		return new AuthUserHandlerMethodArgumentResolver();
-	}
-
-	@Override
-	public void addArgumentResolvers(List<HandlerMethodArgumentResolver> resolvers) {
-		resolvers.add(handlerMethodArgumentResolver());
-	}
-	
-	// Interceptors
-	@Bean
-	public HandlerInterceptor loginInterceptor() {
-		return new LoginInterceptor();
+	public WebSecurityCustomizer webSecurityCustomizer() {
+		return new WebSecurityCustomizer() {
+			@Override
+			public void customize(WebSecurity web) {
+				web
+					.ignoring()
+					.requestMatchers(new AntPathRequestMatcher("/favicon.ico"))
+					.requestMatchers(new AntPathRequestMatcher("/assets/**"));
+			}
+		};
 	}
 	
 	@Bean
-	public HandlerInterceptor logoutInterceptor() {
-		return new LogoutInterceptor();
-	}
-	
-	@Bean
-	public HandlerInterceptor authInterceptor() {
-		return new AuthInterceptor();
-	}
-	
-	@Override
-	public void addInterceptors(InterceptorRegistry registry) {
-		registry
-			.addInterceptor(loginInterceptor())
-			.addPathPatterns("/user/auth");
-		
-		registry
-			.addInterceptor(logoutInterceptor())
-			.addPathPatterns("/user/logout");
-		
-		registry
-			.addInterceptor(authInterceptor())
-			.addPathPatterns("/**")
-			.excludePathPatterns("/user/auth", "/user/logout", "/assets/**");
+	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+		http
+				.formLogin();
+//			.and()
+//				.authorizeHttpRequests(registry -> {
+//					/* ACL */
+//					registry.requestMatchers().hasRole("ADMIN", "USER")
+//				})
+//			.anyRequest()
+//			.permitAll();
+		return http.build();
 	}
 }
