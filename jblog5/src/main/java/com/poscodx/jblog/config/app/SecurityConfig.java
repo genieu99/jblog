@@ -8,6 +8,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.security.web.util.matcher.RegexRequestMatcher;
 
 
 @Configuration
@@ -30,14 +31,20 @@ public class SecurityConfig {
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		http
-				.formLogin();
-//			.and()
-//				.authorizeHttpRequests(registry -> {
-//					/* ACL */
-//					registry.requestMatchers().hasRole("ADMIN", "USER")
-//				})
-//			.anyRequest()
-//			.permitAll();
+				.formLogin()
+				.loginPage("/user/login")
+				.loginProcessingUrl("/user/auth")
+				.usernameParameter("email")
+				.passwordParameter("password")
+			.and()
+				.authorizeHttpRequests(registry -> {
+					/* ACL */
+					registry
+						.requestMatchers(new RegexRequestMatcher("^/user/update$", null))
+						.hasAnyRole("ADMIN", "USER")
+						.anyRequest()
+						.permitAll();
+				});
 		return http.build();
 	}
 }
