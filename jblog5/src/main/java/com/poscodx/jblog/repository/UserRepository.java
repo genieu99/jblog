@@ -5,6 +5,7 @@ import java.util.Map;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.poscodx.jblog.security.UserDetailsImpl;
 import com.poscodx.jblog.vo.UserVo;
 
 @Repository
@@ -20,7 +21,7 @@ public class UserRepository {
 		return sqlSession.insert("user.insert", userVo);
 	}
 
-	public UserVo findById(String id) {
+	public UserDetailsImpl findById(String id) {
 		return sqlSession.selectOne("user.findById", id);
 	}
 

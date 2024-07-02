@@ -4,7 +4,7 @@
 <mapper namespace="user">
 	<insert id="insert" parameterType="uservo">
 		<![CDATA[
-			insert into user values(#{id }, #{name }, password(#{password }), current_date())
+			insert into user values(#{id }, #{name }, #{password }, current_date())
 		]]>
 	</insert>
 	
@@ -14,9 +14,9 @@
 		]]>
 	</select>
 	
-	<select id="findByIdAndPassword" parameterType="map" resultType="uservo">
+	<select id="findByIdAndPassword" parameterType="map" resultType="userdetails">
 		<![CDATA[
-			select id, name, password, join_date from user where id = #{id } and password = password(#{password })
+			select id, name, password, join_date from user where id = #{id } and password = #{password }
 		]]>
 	</select>
 	
