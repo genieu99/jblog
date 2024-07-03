@@ -26,10 +26,6 @@ public class UserService {
 	public UserVo getUser(String id) {
 		return userRepository.findById(id, UserVo.class);
 	}
-	
-	public UserVo login(String id, String password) {
-		return userRepository.findByIdAndPassword(id, password);
-	}
 
 	public boolean findUser(String id) {
 		return userRepository.findUser(id);
