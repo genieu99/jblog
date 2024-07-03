@@ -10,13 +10,7 @@
 	
 	<select id="findById" parameterType="string" resultType="map">
 		<![CDATA[
-			select id, name from user where id = #{id }
-		]]>
-	</select>
-	
-	<select id="findByIdAndPassword" parameterType="map" resultType="userdetails">
-		<![CDATA[
-			select id, name, password, join_date from user where id = #{id } and password = #{password }
+			select id, name, password, join_date as joinDate from user where id = #{id }
 		]]>
 	</select>
 	
