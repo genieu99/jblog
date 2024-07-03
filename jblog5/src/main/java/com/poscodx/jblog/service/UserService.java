@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.poscodx.jblog.repository.UserRepository;
+import com.poscodx.jblog.security.UserDetailsImpl;
 import com.poscodx.jblog.vo.UserVo;
 
 @Service
@@ -24,7 +25,7 @@ public class UserService {
 	}
 
 	public UserVo getUser(String id) {
-		return userRepository.findById(id);
+		return userRepository.findById(id, UserVo.class);
 	}
 	
 	public UserVo login(String id, String password) {

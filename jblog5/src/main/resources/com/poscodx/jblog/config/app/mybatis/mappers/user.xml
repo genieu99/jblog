@@ -8,7 +8,7 @@
 		]]>
 	</insert>
 	
-	<select id="findById" parameterType="string" resultType="uservo">
+	<select id="findById" parameterType="string" resultType="map">
 		<![CDATA[
 			select id, name from user where id = #{id }
 		]]>
