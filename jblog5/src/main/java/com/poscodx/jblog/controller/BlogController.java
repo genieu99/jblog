@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,8 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.poscodx.jblog.security.Auth;
-import com.poscodx.jblog.security.AuthUser;
 import com.poscodx.jblog.service.AdminService;
 import com.poscodx.jblog.service.BlogService;
 import com.poscodx.jblog.service.FileUploadService;
@@ -84,9 +83,9 @@ public class BlogController {
 		return "blog/main";
 	}
 	
-	@Auth
 	@GetMapping("/admin/basic")
-	public String adminBasic(@PathVariable("id") String id, Model model, @AuthUser UserVo user) {
+	public String adminBasic(@PathVariable("id") String id, Model model, Authentication authentication) {
+		UserVo user = (UserVo)authentication.getPrincipal();
 		if (!user.getId().equals(id)) {
 			return "errors/accessError";
 		}
@@ -95,9 +94,9 @@ public class BlogController {
 		return "blog/admin-basic";
 	}
 	
-	@Auth
 	@PostMapping("/admin/basic/update")
-	public String adminBasic(@PathVariable("id") String id, BlogVo blogVo, @RequestParam("logo-file") MultipartFile file, Model model, @AuthUser UserVo user) {
+	public String adminBasic(@PathVariable("id") String id, BlogVo blogVo, @RequestParam("logo-file") MultipartFile file, Model model, Authentication authentication) {
+		UserVo user = (UserVo)authentication.getPrincipal();
 		if (!user.getId().equals(id)) {
 			return "errors/accessError";
 		}
@@ -112,9 +111,9 @@ public class BlogController {
 		return "redirect:/" + id + "/admin/basic";
 	}
 	
-	@Auth
 	@GetMapping("/admin/category")
-	public String adminCategory(@PathVariable("id") String id, Model model, @AuthUser UserVo user) {
+	public String adminCategory(@PathVariable("id") String id, Model model, Authentication authentication) {
+		UserVo user = (UserVo)authentication.getPrincipal();
 		if (!user.getId().equals(id)) {
 			return "errors/accessError";
 		}
@@ -128,9 +127,9 @@ public class BlogController {
 		return "blog/admin-category";
 	}
 	
-	@Auth
 	@PostMapping("/admin/category/add")
-	public String adminCategory(@PathVariable("id") String id, CategoryVo categoryVo, @AuthUser UserVo user) {
+	public String adminCategory(@PathVariable("id") String id, CategoryVo categoryVo, Authentication authentication) {
+		UserVo user = (UserVo)authentication.getPrincipal();
 		if (!user.getId().equals(id)) {
 			return "errors/accessError";
 		}
@@ -139,9 +138,9 @@ public class BlogController {
 		return "redirect:/" + id + "/admin/category";
 	}
 	
-	@Auth
 	@RequestMapping("/admin/category/delete/{no}")
-	public String deleteAdminCategory(@PathVariable("id") String id, @PathVariable("no") Long no, @AuthUser UserVo user, Model model) {
+	public String deleteAdminCategory(@PathVariable("id") String id, @PathVariable("no") Long no, Authentication authentication, Model model) {
+		UserVo user = (UserVo)authentication.getPrincipal();
 		if (!user.getId().equals(id)) {
 			return "errors/accessError";
 		}
@@ -154,9 +153,9 @@ public class BlogController {
 		return "redirect:/" + id + "/admin/category";
 	}
 	
-	@Auth
 	@GetMapping("/admin/write")
-	public String adminWrite(@PathVariable("id") String id, Model model, @AuthUser UserVo user) {
+	public String adminWrite(@PathVariable("id") String id, Model model, Authentication authentication) {
+		UserVo user = (UserVo)authentication.getPrincipal();
 		if (!user.getId().equals(id)) {
 			return "errors/accessError";
 		}
@@ -170,9 +169,9 @@ public class BlogController {
 		return "blog/admin-write";
 	}
 	
-	@Auth
 	@PostMapping("/admin/write")
-	public String adminWrite(@PathVariable("id") String id, PostVo postVo, Model model, @AuthUser UserVo user) {
+	public String adminWrite(@PathVariable("id") String id, PostVo postVo, Model model, Authentication authentication) {
+		UserVo user = (UserVo)authentication.getPrincipal();
 		if (!user.getId().equals(id)) {
 			return "errors/accessError";
 		}
