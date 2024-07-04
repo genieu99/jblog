@@ -47,6 +47,9 @@ public class SecurityConfig {
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		http
+				.logout()
+				.logoutUrl("/user/logout")
+			.and()
 				.formLogin()
 				.loginPage("/user/login")
 				.loginProcessingUrl("/user/auth")
@@ -66,6 +69,7 @@ public class SecurityConfig {
 			.and()
 				.csrf()
 				.disable()
+				
 				.authorizeHttpRequests(registry -> {
 					/* ACL */
 					registry
