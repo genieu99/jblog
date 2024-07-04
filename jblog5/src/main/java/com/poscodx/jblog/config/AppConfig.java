@@ -14,6 +14,6 @@ import com.poscodx.jblog.config.app.SecurityConfig;
 @EnableAspectJAutoProxy
 @EnableTransactionManagement
 @ComponentScan({"com.poscodx.jblog.service", "com.poscodx.jblog.repository", "com.poscodx.jblog.aspect"})
-@Import({DBConfig.class, MyBatisConfig.class})
+@Import({DBConfig.class, MyBatisConfig.class, SecurityConfig.class})
 public class AppConfig {
 }
