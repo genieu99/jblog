@@ -33,13 +33,13 @@
 							<td>${category.count }</td>
 							<td>${category.description }</td>
 							<td>
-        						<a href="${pageContext.request.contextPath}/${authUser.id}/admin/category/delete/${category.no }"><img src="${pageContext.request.contextPath}/assets/images/delete.jpg"></a>
+        						<a href="${pageContext.request.contextPath}/${blog.id }/admin/category/delete/${category.no }"><img src="${pageContext.request.contextPath}/assets/images/delete.jpg"></a>
         					</td>
 						</tr>
 		      		</c:forEach>  
 				</table>
 				
-      			<form action="${pageContext.request.contextPath }/${authUser.id }/admin/category/add" method="post">
+      			<form action="${pageContext.request.contextPath }/${blog.id }/admin/category/add" method="post">
       				<h4 class="n-c">새로운 카테고리 추가</h4>
 			      	<table id="admin-cat-add">
 			      		<tr>
